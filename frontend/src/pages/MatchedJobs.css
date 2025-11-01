@@ -1,0 +1,36 @@
+.subtitle {
+  color: #7f8c8d;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.match-info {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.match-info p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.no-matches {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.no-matches h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.no-matches p {
+  color: #7f8c8d;
+  margin-bottom: 25px;
+  font-size: 16px;
+}
