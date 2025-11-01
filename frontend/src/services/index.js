@@ -49,11 +49,7 @@ export const resumeService = {
     const formData = new FormData();
     formData.append('resume', file);
     
-    const response = await api.post('/resume/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    });
+    const response = await api.post('/resume/upload', formData);
     return response.data;
   },
 

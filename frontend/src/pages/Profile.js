@@ -15,6 +15,7 @@ const Profile = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [message, setMessage] = useState({ type: '', text: '' });
   const [loading, setLoading] = useState(false);
+  const fileInputRef = React.useRef(null);
 
   useEffect(() => {
     loadProfile();
@@ -96,8 +97,10 @@ const Profile = () => {
       setSelectedFile(null);
       setMessage({ type: 'success', text: 'Resume uploaded successfully!' });
       
-      // Reset file input
-      document.getElementById('resume-file').value = '';
+      // Reset file input using ref
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     } catch (error) {
       setMessage({ 
         type: 'error', 
@@ -225,7 +228,7 @@ const Profile = () => {
               <label>Upload Resume (PDF, DOC, DOCX)</label>
               <input
                 type="file"
-                id="resume-file"
+                ref={fileInputRef}
                 className="form-control"
                 onChange={handleFileChange}
                 accept=".pdf,.doc,.docx"

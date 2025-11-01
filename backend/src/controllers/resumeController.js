@@ -2,6 +2,13 @@ const User = require('../models/User');
 const path = require('path');
 const fs = require('fs').promises;
 
+// Validate that file path is within uploads directory
+const isValidUploadPath = (filePath) => {
+  const uploadsDir = path.resolve('uploads/resumes');
+  const resolvedPath = path.resolve(filePath);
+  return resolvedPath.startsWith(uploadsDir);
+};
+
 // @desc    Upload resume
 // @route   POST /api/resume/upload
 // @access  Private
@@ -20,7 +27,10 @@ const uploadResume = async (req, res) => {
     // Delete old resume if exists
     if (user.resume && user.resume.path) {
       try {
-        await fs.unlink(user.resume.path);
+        // Validate path before deletion
+        if (isValidUploadPath(user.resume.path)) {
+          await fs.unlink(user.resume.path);
+        }
       } catch (error) {
         console.log('Error deleting old resume:', error.message);
       }
@@ -74,7 +84,10 @@ const deleteResume = async (req, res) => {
 
     // Delete file from filesystem
     try {
-      await fs.unlink(user.resume.path);
+      // Validate path before deletion
+      if (isValidUploadPath(user.resume.path)) {
+        await fs.unlink(user.resume.path);
+      }
     } catch (error) {
       console.log('Error deleting resume file:', error.message);
     }

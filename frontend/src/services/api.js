@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { createBrowserHistory } from 'history';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
@@ -31,6 +32,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
+      // Note: This will cause a full page reload
+      // In a production app, consider using React Router's navigation
       window.location.href = '/login';
     }
     return Promise.reject(error);
